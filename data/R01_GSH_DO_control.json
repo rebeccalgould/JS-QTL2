@@ -1,0 +1,28 @@
+{
+  "description": "Gigamuga DO data - sorted by chromosome order",
+  "crosstype": "do",
+  "geno": "R01_GSH_DO_geno_sorted.csv",
+  "geno_transposed": true,
+  "founder_geno": "R01_GSH_DO_founder_geno_sorted.csv",
+  "founder_geno_transposed": true,
+  "genotypes": {
+    "1": "1",
+    "2": "2",
+    "3": "3"
+  },
+  "pheno": "R01_GSH_DO_pheno.csv", 
+  "pheno_transposed": false,
+  "covar": "R01_GSH_DO_covar.csv",
+  "sex": {
+    "covar": "sex",
+    "F": "F",
+    "M": "M"
+  },
+  "x_chr": "X",
+  "cross_info": {
+    "covar": "generation"
+  },
+  "gmap": "R01_GSH_DO_gmap_sorted.csv",
+  "pmap": "R01_GSH_DO_pmap_sorted.csv",
+  "alleles": ["A", "B", "C", "D", "E", "F", "G", "H"]
+}
