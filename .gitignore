@@ -4,3 +4,5 @@ data/.DS_Store
 *.rds
 *.sqlite
 .DS_Store
+Heart-GSH-QTL/scripts/.Rhistory
+*.history
