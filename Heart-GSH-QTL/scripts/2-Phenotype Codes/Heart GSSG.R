@@ -59,64 +59,6 @@ pdf(file = "Heart GSSG QTL Results.pdf")
 ## Estimate QTL Effects (Coefficients) + Connect to SNP and Gene Databases
 ####################################################
 
-#For Heart GSSG --- Chromosome 16
-  par(mar=c(4.1, 4.1, 2.6, 2.6))
-
-  #estimate QTL effects by founder strain
-  #using gmap (cM)
-  chr = 16
-  coef_blup_HeartGSSG_chr16 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zHeartGSSG"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 10)
-  plot_coefCC(x = coef_blup_HeartGSSG_chr16, map = control$gmap, scan1_output = qtlscan_HeartGSSG, main = "Heart GSSG BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
-  xlim <- c(45,58)
-  plot_coefCC(x = coef_blup_HeartGSSG_chr16, map = control$gmap, scan1_output = qtlscan_HeartGSSG, main = "Heart GSSG BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
-
-  #using pmap (Mbp)
-  chr = 16
-  #could use ci_lo or ci_hi, but in this case, I want a specific chromosome 16 peak
-  #start = pmap_peaksHeartGSSG[pmap_peaksHeartGSSG$chr ==  chr,"ci_lo"]
-  #end = pmap_peaksHeartGSSG[pmap_peaksHeartGSSG$chr == chr, "ci_hi"] 
-  
-  pander(pmap_peaksHeartGSSG)
-  #based on pmap_peaksHeartGSSG, peak of interest is ~96.99176 Mbp
-  #Becca typically does +/- of the QTL interval
-  variants_HeartGSSG_chr16 <- query_variants(chr, 95, 99)
-  out_snps_HeartGSSG_chr16 <- scan1snps(genoprobs = probs, map = control$pmap, pheno = pheno["zHeartGSSG"], kinship = kinship_loco[[chr]], addcovar = sexgen, query_func = query_variants,
-                                         chr = chr, start = 95, end = 99, keep_all_snps = TRUE)
-  plot_snpasso(out_snps_HeartGSSG_chr16$lod, out_snps_HeartGSSG_chr16$snpinfo, main = "Heart GSSG SNPs")
-    
-  HeartGSSG_Genes_MGI_chr16 <- query_genes_mgi(chr = chr, start = 95, end = 99)
-  plot(out_snps_HeartGSSG_chr16$lod, out_snps_HeartGSSG_chr16$snpinfo, drop_hilit=1.5, genes = HeartGSSG_Genes_MGI_chr16, main = "Heart GSSG Genes MGI")
-  
-  
-#For Heart GSSG --- Chromosome 19
-  par(mar=c(4.1, 4.1, 2.6, 2.6))
-  
-  #estimate QTL effects by founder strain
-  #using gmap (cM)
-  chr = 19
-  coef_blup_HeartGSSG_chr19 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zHeartGSSG"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 10)
-  plot_coefCC(x = coef_blup_HeartGSSG_chr19, map = control$gmap, scan1_output = qtlscan_HeartGSSG, main = "Heart GSSG BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
-  xlim <- c(45,56)
-  plot_coefCC(x = coef_blup_HeartGSSG_chr19, map = control$gmap, scan1_output = qtlscan_HeartGSSG, main = "Heart GSSG BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
-  
-  #using pmap (Mbp)
-  chr = 19
-  #could use ci_lo or ci_hi, but in this case, I want a specific chromosome 16 peak
-  #start = pmap_peaksHeartGSSG[pmap_peaksHeartGSSG$chr ==  chr,"ci_lo"]
-  #end = pmap_peaksHeartGSSG[pmap_peaksHeartGSSG$chr == chr, "ci_hi"] 
-  
-  pander(pmap_peaksHeartGSSG)
-  #based on pmap_peaksHeartGSSG, peak of interest is ~57.15 Mbp
-  #Becca typically does +/- of the QTL interval
-  variants_HeartGSSG_chr19 <- query_variants(chr, 56, 58.5)
-  out_snps_HeartGSSG_chr19 <- scan1snps(genoprobs = probs, map = control$pmap, pheno = pheno["zHeartGSSG"], kinship = kinship_loco[[chr]], addcovar = sexgen, query_func = query_variants,
-                                       chr = chr, start = 56, end = 58.5, keep_all_snps = TRUE)
-  plot_snpasso(out_snps_HeartGSSG_chr19$lod, out_snps_HeartGSSG_chr19$snpinfo, main = "Heart GSSG SNPs")
-  
-  HeartGSSG_Genes_MGI_chr19 <- query_genes_mgi(chr = chr, start = 56, end = 58.5)
-  plot(out_snps_HeartGSSG_chr19$lod, out_snps_HeartGSSG_chr19$snpinfo, drop_hilit=1.5, genes = HeartGSSG_Genes_MGI_chr19, main = "Heart GSSG Genes MGI")
-
-  
 dev.off()
 
 ####################################################
