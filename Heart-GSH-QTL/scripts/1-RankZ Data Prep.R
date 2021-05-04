@@ -112,7 +112,11 @@ library (RSQLite)
   
 #Rank Z transformations of each phenotype
   pheno$zHeartGSH = rankZ(pheno$Heart_GSH)
- 
+  pheno$zHeartGSSG = rankZ(pheno$Heart_GSSG)
+  pheno$zHeartTotalGSH = rankZ(pheno$Heart_TotalGSH)
+  pheno$zHeartGSHGSSGRatio = rankZ(pheno$Heart_GSHGSSGRatio)
+  pheno$zHeartEh = rankZ(pheno$Heart_Eh)
+  
 
 #####Plot the transformations  
 
@@ -127,9 +131,39 @@ pdf(file = "Box Plots and QQ Norm Plots - RankZ and Raw.pdf")
   boxplot(pheno$zHeartGSH~pheno$generation, main = "Rank Z Heart GSH Box Plot - by generation")
   #check if it is normally distributed
   qqnorm(pheno$zHeartGSH, main = "Normal QQ Plot - Rank Z Heart GSH")
+
+#For Heart GSSG
+  boxplot(pheno$Heart_GSSG, main = "Heart GSSG Box Plot")
+  boxplot(pheno$Heart_GSSG~pheno$generation, main = "Heart GSSG Box Plot - by generation")
+  boxplot(pheno$zHeartGSSG, main = "Rank Z Heart GSSG Box Plot")
+  boxplot(pheno$zHeartGSSG~pheno$generation, main = "Rank Z Heart GSSG Box Plot - by generation")
+  #check if it is normally distributed
+  qqnorm(pheno$zHeartGSSG, main = "Normal QQ Plot - Rank Z Heart GSSG")
   
+#For Heart Total GSH
+  boxplot(pheno$Heart_TotalGSH, main = "Heart TotalGSH Box Plot")
+  boxplot(pheno$Heart_TotalGSH~pheno$generation, main = "Heart TotalGSH Box Plot - by generation")
+  boxplot(pheno$zHeartTotalGSH, main = "Rank Z Heart TotalGSH Box Plot")
+  boxplot(pheno$zHeartTotalGSH~pheno$generation, main = "Rank Z Heart TotalGSH Box Plot - by generation")
+  #check if it is normally distributed
+  qqnorm(pheno$zHeartTotalGSH, main = "Normal QQ Plot - Rank Z Heart TotalGSH")
   
-####add in other phenotypes
+#For Heart GSH/GSSG Ratio
+  boxplot(pheno$Heart_GSHGSSGRatio, main = "Heart GSHGSSGRatio Box Plot")
+  boxplot(pheno$Heart_GSHGSSGRatio~pheno$generation, main = "Heart GSHGSSGRatio Box Plot - by generation")
+  boxplot(pheno$zHeartGSHGSSGRatio, main = "Rank Z Heart GSHGSSGRatio Box Plot")
+  boxplot(pheno$zHeartGSHGSSGRatio~pheno$generation, main = "Rank Z Heart GSHGSSGRatio Box Plot - by generation")
+  #check if it is normally distributed
+  qqnorm(pheno$zHeartGSHGSSGRatio, main = "Normal QQ Plot - Rank Z Heart GSHGSSGRatio")
+  
+#For Heart Eh
+  boxplot(pheno$Heart_Eh, main = "Heart Eh Box Plot")
+  boxplot(pheno$Heart_Eh~pheno$generation, main = "Heart Eh Box Plot - by generation")
+  boxplot(pheno$zHeartEh, main = "Rank Z Heart Eh Box Plot")
+  boxplot(pheno$zHeartEh~pheno$generation, main = "Rank Z Heart Eh Box Plot - by generation")
+  #check if it is normally distributed
+  qqnorm(pheno$zHeartEh, main = "Normal QQ Plot - Rank Z Heart Eh")
+  
 
 dev.off()
 
