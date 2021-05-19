@@ -40,7 +40,7 @@ library (RSQLite)
 ## Genotype probabilities and allele probabilities - provided by Belinda and Vivek
 ####################################################
 
-#read in the genoprobs file that is sorted by chromosomes in numerical order - the 8state.rds is the allele probabilities, the 32state.rds is the genotype probabilities
+#read in the genoprobs file that is sorted by chromosomes in numerical order - the 8state.rds is the allele probabilities, the 36state.rds is the genotype probabilities
 #^this is actually the ALlELE probabilities, but for simplicity, we will call it "probs"
   probs <- readRDS("~/JS-QTL2/data/Pazdro_GigaMUGA_genoprobs_qced_8state_sorted.rds")
 
