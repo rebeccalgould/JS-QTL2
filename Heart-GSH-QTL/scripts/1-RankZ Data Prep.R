@@ -44,7 +44,7 @@ library (RSQLite)
 #^this is actually the ALlELE probabilities, but for simplicity, we will call it "probs"
   probs <- readRDS("~/JS-QTL2/data/Pazdro_GigaMUGA_genoprobs_qced_8state_sorted.rds")
 
-  nrow(data.frame(R01_GSH_DO_QTLdata$gmap[1]))
+  nrow(data.frame(control$gmap[1]))
   #should be 10415
   dim(probs[[1]])
   #should be 347 individuals, 8 alleles, 10415 markers
@@ -65,7 +65,7 @@ library (RSQLite)
 
 #calculate the kinship loco
 #you can increase the cores amount if you have more cores in your computer. For mine, I have 18 cores available so to speed it up, I'll use 10 of them.
-  kinship_loco <- calc_kinship(probs = probs, "loco", use_allele_probs = TRUE, cores = 10)
+  kinship_loco <- calc_kinship(probs = probs, "loco", use_allele_probs = TRUE, cores = 2)
 
 #Create the r plot of the kinship matrix
   par(mar=c(4.1, 4.1, 2.6, 2.6))
@@ -181,7 +181,7 @@ sexgen = model.matrix(~ sex + generation, data = pheno)[,-1]
 #####make kinship function using linear mixed model, not loco
 #####default type of kinship is "overall" aka "linear mixed model" -- did not need to specify a type
   
-kinship_lmm <- calc_kinship(probs = probs, use_allele_probs = TRUE, cores = 10)
+kinship_lmm <- calc_kinship(probs = probs, use_allele_probs = TRUE, cores = 2)
 
 #adding sex as covariate to compare to sexgen
 sex = model.matrix(~ sex, data = pheno)[,-1] 
