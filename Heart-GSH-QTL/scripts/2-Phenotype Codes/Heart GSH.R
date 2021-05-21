@@ -26,8 +26,8 @@ library (RSQLite)
 ## Plot Genome Scans with Permutation Tests
 ####################################################
 
-qtlscan_HeartGSH <- scan1(genoprobs = probs, pheno = pheno["zHeartGSH"], kinship = kinship_loco, addcovar = sexgen, cores=10)
-perm_HeartGSH <- scan1perm(genoprobs = probs, pheno = pheno["zHeartGSH"], addcovar = sexgen, n_perm = 1000, cores=10)
+qtlscan_HeartGSH <- scan1(genoprobs = probs, pheno = pheno["zHeartGSH"], kinship = kinship_loco, addcovar = sexgen, cores=2)
+perm_HeartGSH <- scan1perm(genoprobs = probs, pheno = pheno["zHeartGSH"], addcovar = sexgen, n_perm = 1000, cores=2)
 
 #set working directory
 pdf(file = "Heart GSH QTL Results.pdf")
@@ -65,7 +65,7 @@ pdf(file = "Heart GSH QTL Results.pdf")
   #estimate QTL effects by founder strain
   #using gmap (cM)
   chr = 16
-  coef_blup_HeartGSH_chr16 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zHeartGSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 10)
+  coef_blup_HeartGSH_chr16 <- scan1blup(genoprobs = probs[,chr], pheno = pheno["zHeartGSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 10)
   plot_coefCC(x = coef_blup_HeartGSH_chr16, map = control$gmap, scan1_output = qtlscan_HeartGSH, main = "Heart GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
   xlim <- c(45,58)
   plot_coefCC(x = coef_blup_HeartGSH_chr16, map = control$gmap, scan1_output = qtlscan_HeartGSH, main = "Heart GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
@@ -79,12 +79,12 @@ pdf(file = "Heart GSH QTL Results.pdf")
   pander(pmap_peaksHeartGSH)
   #based on pmap_peaksHeartGSH, peak of interest is ~96.99176 Mbp
   #Becca typically does +/- of the QTL interval
-  variants_HeartGSH_chr16 <- query_variants(chr, 95, 99)
+  variants_HeartGSH_chr16 <- query_variants(chr, 95, 98)
   out_snps_HeartGSH_chr16 <- scan1snps(genoprobs = probs, map = control$pmap, pheno = pheno["zHeartGSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, query_func = query_variants,
-                                         chr = chr, start = 95, end = 99, keep_all_snps = TRUE)
+                                         chr = chr, start = 95, end = 98, keep_all_snps = TRUE)
   plot_snpasso(out_snps_HeartGSH_chr16$lod, out_snps_HeartGSH_chr16$snpinfo, main = "Heart GSH SNPs")
     
-  HeartGSH_Genes_MGI_chr16 <- query_genes_mgi(chr = chr, start = 95, end = 99)
+  HeartGSH_Genes_MGI_chr16 <- query_genes_mgi(chr = chr, start = 95, end = 98)
   plot(out_snps_HeartGSH_chr16$lod, out_snps_HeartGSH_chr16$snpinfo, drop_hilit=1.5, genes = HeartGSH_Genes_MGI_chr16, main = "Heart GSH Genes MGI")
   
   
@@ -115,7 +115,7 @@ pdf(file = "Heart GSH QTL Results.pdf")
   
   HeartGSH_Genes_MGI_chr19 <- query_genes_mgi(chr = chr, start = 56, end = 58.5)
   plot(out_snps_HeartGSH_chr19$lod, out_snps_HeartGSH_chr19$snpinfo, drop_hilit=1.5, genes = HeartGSH_Genes_MGI_chr19, main = "Heart GSH Genes MGI")
-
+  plot_genes(HeartGSH_Genes_MGI_chr19)
   
 dev.off()
 
@@ -153,7 +153,7 @@ chr = 9
 xlim <- c(42.5,44)
 plot_coefCC(x = coef_blup_HeartGSH_chr9, map = control$gmap, scan1_output = qtlscan_HeartGSH, main = "Gclc Position -- Heart GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95", xlim = xlim)
 
-#Glutamate-cysteine ligase – modifier subunit (Gclm) - Chr 3 52.94 cM
+#Glutamate-cysteine ligase modifier subunit (Gclm) - Chr 3 52.94 cM
 chr = 3
 coef_blup_HeartGSH_chr3 <- scan1blup(genoprobs =  probs[,chr], pheno = pheno["zHeartGSH"], kinship = kinship_loco[[chr]], addcovar = sexgen, cores = 2)
 plot_coefCC(x = coef_blup_HeartGSH_chr3, map = control$gmap, scan1_output = qtlscan_HeartGSH, main = "Heart GSH BLUPs plotted with CC Founders", legend = "bottomleft", bgcolor="gray95")
