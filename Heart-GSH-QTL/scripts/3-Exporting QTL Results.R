@@ -24,7 +24,7 @@ library (RSQLite)
 #set wd
 
 #tells you all of the qtlscans that you have
-ls(pattern = "qtl") 
+ls(pattern = "qtlscan") 
 
 
 ####################################################
